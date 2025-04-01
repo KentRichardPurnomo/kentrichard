@@ -1,0 +1,594 @@
+/* Google Font */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('gudetama-bg.png') repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: background 0.3s ease;
+}
+.nav-link {
+    font-weight: 400;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: #007bff;
+}
+.btn-theme {
+    background-color: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+    transition: 0.3s;
+}
+.btn-theme:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px;
+    min-height: 100vh;
+    color: black;
+}
+
+.hero-text {
+    max-width: 50%;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.hero-text span {
+    background: linear-gradient(to right, red, green, blue, orange, purple);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.profile-img {
+    max-width: 450px;
+    height: auto;
+    border-radius: 10px;
+    filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+/* Carousel */
+.carousel-inner img {
+    max-height: 1200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Projects Section */
+.projects-section {
+    padding: 80px 0;
+}
+
+.project-filters .btn {
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.project-filters .btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.project-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.project-card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.project-card:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.dark-mode .project-card {
+    background: rgba(51, 51, 51, 0.9);
+    color: white;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.project-img {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.1);
+}
+
+.project-links {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    transition: bottom 0.3s ease;
+}
+
+.project-card:hover .project-links {
+    bottom: 0;
+}
+
+.project-info {
+    padding: 20px;
+}
+
+.project-info h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.dark-mode .project-info h3 {
+    color: #4da6ff;
+}
+
+.project-tags {
+    margin-top: 15px;
+}
+
+.project-tags .badge {
+    margin-right: 5px;
+    font-weight: normal;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #222;
+    color: white;
+}
+.dark-mode .navbar {
+    background-color: #333;
+}
+.dark-mode .nav-link {
+    color: white;
+}
+.dark-mode .nav-link:hover {
+    color: #ddd;
+}
+.dark-mode .btn-theme {
+    border-color: white;
+    color: white;
+}
+.dark-mode .btn-theme:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Footer */
+.social-footer {
+    background-color: #fff;
+    padding: 20px 0;
+    margin-top: 50px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode .social-footer {
+    background-color: #222;
+}
+
+.social-icon {
+    font-size: 30px;
+    margin: 0 15px;
+    color: #333;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode .social-icon {
+    color: white;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Warna spesifik ikon saat hover */
+.social-icon:nth-child(1):hover { color: #E4405F; }  /* Instagram */
+.social-icon:nth-child(2):hover { color: gray; }    /* GitHub */
+.social-icon:nth-child(3):hover { color: #1DB954; } /* Spotify */
+.social-icon:nth-child(4):hover { color: #FF0000; } /* YouTube */
+.social-icon:nth-child(5):hover { color: gray; }    /* TikTok */
+
+/* Responsif */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        font-size: 2rem;
+    }
+
+    .profile-img {
+        max-width: 300px;
+    }
+    
+    .project-card {
+        margin-bottom: 30px;
+    }
+}
+
+/* Game Cards Styling */
+.game-card {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: 100%;
+    position: relative;
+    border: none;
+    margin-bottom: 30px;
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.dark-mode .game-card {
+    background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.game-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 123, 255, 0.15);
+}
+
+.dark-mode .game-card:hover {
+    box-shadow: 0 12px 40px rgba(77, 166, 255, 0.15);
+}
+
+.game-img {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 3px solid rgba(0, 123, 255, 0.3);
+}
+
+.dark-mode .game-img {
+    border-bottom: 3px solid rgba(77, 166, 255, 0.3);
+}
+
+.game-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: brightness(0.95);
+}
+
+.game-card:hover .game-img img {
+    transform: scale(1.08);
+    filter: brightness(1.05);
+}
+
+.game-links {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.game-card:hover .game-links {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.game-links .btn {
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 123, 255, 0.85);
+    border: none;
+}
+
+.game-links .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+    background-color: rgba(0, 123, 255, 1);
+}
+
+.game-info {
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.game-info h3 {
+    margin: 0 0 12px 0;
+    color: #007bff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.dark-mode .game-info h3 {
+    color: #4da6ff;
+}
+
+.game-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #007bff, rgba(0, 123, 255, 0.3));
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.game-card:hover .game-info h3::after {
+    width: 100%;
+}
+
+.dark-mode .game-info h3::after {
+    background: linear-gradient(90deg, #4da6ff, rgba(77, 166, 255, 0.3));
+}
+
+.game-info p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.dark-mode .game-info p {
+    color: #ccc;
+}
+
+/* Enhanced 3D Model Viewer Container */
+.model-container {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-top: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05));
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.dark-mode .model-container {
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.05));
+}
+
+.game-card:hover .model-container {
+    box-shadow: inset 0 0 30px rgba(0, 123, 255, 0.1);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    --poster-color: transparent;
+    --progress-bar-color: #007bff;
+    --progress-mask: transparent;
+    border: none;
+    background: transparent;
+}
+
+.dark-mode model-viewer {
+    --progress-bar-color: #4da6ff;
+}
+
+/* Model Controls */
+.model-controls {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.game-card:hover .model-controls {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.model-control-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(3px);
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.dark-mode .model-control-btn {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.model-control-btn:hover {
+    background-color: rgba(0, 123, 255, 0.8);
+    transform: scale(1.1);
+}
+
+.model-control-btn.active {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.dark-mode .model-control-btn.active {
+    background-color: #4da6ff;
+    border-color: #4da6ff;
+}
+
+/* Model Overlay (Character Name) */
+.model-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.game-card:hover .model-overlay {
+    opacity: 1;
+}
+
+/* Character Glow Effect */
+.character-glow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: radial-gradient(ellipse at center, rgba(0, 123, 255, 0.2) 0%, rgba(0, 123, 255, 0) 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.dark-mode .character-glow {
+    background: radial-gradient(ellipse at center, rgba(77, 166, 255, 0.2) 0%, rgba(77, 166, 255, 0) 70%);
+}
+
+.game-card:hover .character-glow {
+    opacity: 0.6;
+}
+
+/* Animation to appear when in viewport */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Make sure game cards are visible once loaded */
+.js-loaded .game-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Make model container visible when in viewport */
+.js-model-visible .model-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Loading animation for model viewer */
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+model-viewer::part(default-progress-bar) {
+    height: 4px;
+    animation: pulse 1.5s infinite;
+}
+
+/* Adaptive styling for smaller screens */
+@media (max-width: 768px) {
+    .game-card {
+        margin-bottom: 40px;
+    }
+    
+    .model-container {
+        height: 250px;
+    }
+    
+    .game-img {
+        height: 180px;
+    }
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kent Richard Purnomo</title>
+    <link rel="icon" href="1.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="game.html">Game</a>
+                    </li>
+                </ul>
+                <button class="btn btn-theme" id="themeToggle">
+                    <i id="theme-icon" class="bi bi-moon"></i> Mode
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5 pt-5">
+        <h2 class="text-center mb-4 mt-5 pt-4">MY GAMES</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="game-card">
+                    <div class="game-img">
+                        <img src="genshinlogo.png" alt="genshinlogo" class="img-fluid">
+                        <div class="game-links">
+                            <a href="https://akasha.cv/profile/813277589" class="btn btn-sm btn-primary">Details</a>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>Genshin Impact</h3>
+                        <p>Open-world action RPG developed and published by HoYoverse for the PC, iOS/Android, PS4/PS5, and Xbox Series X|S platforms. The game is free-to-play with a gacha monetization system in the form of Wishes.</p>
+                        <div class="model-container">
+                            <model-viewer 
+                                src="genshin_impact__lumine.glb" alt="Lumine from Genshin Impact"
+                                camera-controls
+                                auto-rotate
+                                camera-orbit="45deg 55deg 100.5m" field-of-view="30deg"  interaction-prompt="none" shadow-intensity="1"
+                                ar
+                                ar-modes="webxr scene-viewer quick-look">
+                            </model-viewer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="game-card">
+                    <div class="game-img">
+                        <img src="valorantlogo.jpg" alt="valorantlogo" class="img-fluid">
+                        <div class="game-links">
+                            <a href="https://tracker.gg/valorant/profile/riot/Lukky%234391" class="btn btn-sm btn-primary">Details</a>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>Valorant</h3>
+                        <p>Competitive tactical shooter from the first-person perspective, featuring a cast of characters known as agents that each have their own unique set of abilities to create tactical opportunities developed by Riot.</p>
+                        <div class="model-container">
+                            <model-viewer 
+                                src="jett__valorant.glb" alt="Jett from Valorant"
+                                camera-controls
+                                auto-rotate
+                                camera-orbit="30deg 60deg 100.8m" field-of-view="35deg" interaction-prompt="none" shadow-intensity="1"
+                                ar
+                                ar-modes="webxr scene-viewer quick-look">
+                            </model-viewer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Osu Card -->
+            <div class="col-md-4">
+                <div class="game-card">
+                    <div class="game-img">
+                        <img src="osulogo.jpg" alt="osulogos" class="img-fluid">
+                        <div class="game-links">
+                            <a href="https://osu.ppy.sh/users/20139512" class="btn btn-sm btn-primary">Details</a>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>Osu</h3>
+                        <p>Freeware rhythm game originally created and self-published by Australian developer Dean Herbert. It was released for Microsoft Windows on 16 September 2007, with later ports to macOS, Linux, Android and iOS.</p>
+                        <div class="model-container">
+                            <model-viewer 
+                                src="catosu.glb" 
+                                alt="Osu Cat"
+                                camera-controls
+                                auto-rotate
+                                camera-orbit="20deg 45deg 100.2m" field-of-view="40deg" interaction-prompt="none" shadow-intensity="1"
+                                ar
+                                ar-modes="webxr scene-viewer quick-look">
+                            </model-viewer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="game-card">
+                    <div class="game-img">
+                        <img src="aqwlogo.jpg" alt="aqwlogo" class="img-fluid">
+                        <div class="game-links">
+                            <a href="https://account.aq.com/CharPage?id=Lukky180504" class="btn btn-sm btn-primary">Details</a>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>Adventure Quest Worlds</h3>
+                        <p>Massively multiplayer online role-playing game set in the world of Lore, where players traverse its landscape and engage in quests and battles against various monsters, all while interacting with or alongside other players and non-playable characters (NPCs)</p>
+                        <div class="model-container">
+                            <model-viewer 
+                                src="bulky_knight.glb" 
+                                alt="Knight from AQW"
+                                camera-controls
+                                auto-rotate
+                                camera-orbit="25deg 50deg 2m" field-of-view="30deg" interaction-prompt="none" 
+                                shadow-intensity="1"
+                                ar
+                                ar-modes="webxr scene-viewer quick-look">
+                            </model-viewer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="game-card">
+                    <div class="game-img">
+                        <img src="hsrlogo.png" alt="hsrlogo" class="img-fluid">
+                        <div class="game-links">
+                            <a href="https://enka.network/hsr/825553408/" class="btn btn-sm btn-primary">Details</a>
+                        </div>
+                    </div>
+                    <div class="game-info">
+                        <h3>Honkai Star Rail</h3>
+                        <p>Role-playing games where players build up a lineup of characters and control a team of up to four in turn-based combat. In addition to various stats that affect characters' strength, each character has a combat type that affects the kind of damage dealt to targets</p>
+                        <div class="model-container">
+                            <model-viewer 
+                                src="kafka.glb" 
+                                alt="Kafka from Honkai Star Rail"
+                                camera-controls
+                                auto-rotate 
+                                camera-orbit="35deg 65deg 100.5m" field-of-view="30deg" interaction-prompt="none" shadow-intensity="1"
+                                ar
+                                ar-modes="webxr scene-viewer quick-look">
+                            </model-viewer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="social-footer">
+        <div class="container text-center">
+            <a href="https://www.instagram.com/k3ntim/" class="social-icon"><i class="bi bi-instagram"></i></a>
+            <a href="https://github.com/KentRichardPurnomo" class="social-icon"><i class="bi bi-github"></i></a>
+            <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5?si=614b35742f1941d7" class="social-icon"><i class="bi bi-spotify"></i></a>
+            <a href="https://www.youtube.com/@lukky1804" class="social-icon"><i class="bi bi-youtube"></i></a>
+            <a href="https://www.tiktok.com/@lukky1804" class="social-icon"><i class="bi bi-tiktok"></i></a>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
