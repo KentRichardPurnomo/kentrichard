@@ -63,6 +63,100 @@ body {
     filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.3));
 }
 
+/* Skills Section */
+.skills-section {
+  padding: 5rem 0;
+  background: var(--bg-color);
+}
+
+.skill-icon img {
+  width: 50px;  
+  height: 50px;
+  object-fit: contain;
+}
+
+
+.skills-section h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 2px solid var(--border-color);
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.skill-item:hover {
+  transform: translateY(-10px) scale(1.05);
+  border-color: var(--primary-color);
+  box-shadow: 0 20px 40px rgba(108, 99, 255, 0.2);
+}
+
+.skill-icon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: white;
+  transition: transform 0.4s ease;
+}
+
+.skill-item:hover .skill-icon {
+  transform: rotate(10deg) scale(1.2);
+}
+
+.skill-name {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Skill specific gradients */
+.flutter { background: linear-gradient(135deg, #02569B, #4FC3F7); }
+.css { background: linear-gradient(135deg, #1572B6, #33A9DC); }
+.c { background: linear-gradient(135deg, lightblue); }
+.bootstrap { background: linear-gradient(135deg, #7952B3, #6610F2); }
+.dart { background: linear-gradient(135deg, #0175C2, #13B9FD); }
+.figma { background: linear-gradient(135deg, black); }
+.github { background: linear-gradient(135deg, #333, #586069); }
+.html { background: linear-gradient(135deg, #E34F26, #F06529); }
+.java { background: linear-gradient(135deg, #ED8B00, #F89820); }
+.laravel { background: linear-gradient(135deg, black); }
+.mysql { background: linear-gradient(135deg, #4479A1, #5B9BD5); }
+.php { background: linear-gradient(135deg, #777BB4, #8993BE); }
+.react { background: linear-gradient(135deg, black); }
+.tailwind { background: linear-gradient(135deg, darkblue); }
+.typescript { background: linear-gradient(135deg, #3178C6, #2B6CB0); }
+.python { background: linear-gradient(135deg, #333, #586069); }
+.jupyternotebook { background: linear-gradient(135deg, white); }
+.firebase { background: linear-gradient(135deg, black); }
+
+
 /* Carousel */
 .carousel-inner img {
     max-height: 1200px;
