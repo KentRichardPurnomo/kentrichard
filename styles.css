@@ -155,6 +155,7 @@ body {
 .python { background: linear-gradient(135deg, #333, #586069); }
 .jupyternotebook { background: linear-gradient(135deg, white); }
 .firebase { background: linear-gradient(135deg, black); }
+.scikit { background: linear-gradient(135deg, gray); }
 
 
 /* Carousel */
