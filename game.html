@@ -1,180 +1,629 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kent Richard Purnomo</title>
-    <link rel="icon" href="1.jpg">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Games — Kent Richard Purnomo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f3ef;
+            --bg2: #eceae4;
+            --surface: #ffffff;
+            --text: #1a1814;
+            --text2: #6b6760;
+            --text3: #9e9b96;
+            --accent: #2d2aad;
+            --accent2: #e8e7fc;
+            --accent3: #c5c3f8;
+            --border: rgba(0,0,0,0.08);
+            --border2: rgba(0,0,0,0.14);
+            --nav-h: 64px;
+        }
+        [data-theme="dark"] {
+            --bg: #111110;
+            --bg2: #1a1916;
+            --surface: #1f1e1c;
+            --text: #f0ede8;
+            --text2: #9e9b96;
+            --text3: #5c5a56;
+            --accent: #7977e8;
+            --accent2: #1e1d3a;
+            --accent3: #2d2b5c;
+            --border: rgba(255,255,255,0.07);
+            --border2: rgba(255,255,255,0.12);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            height: var(--nav-h);
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            gap: 16px;
+        }
+        .nav-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            margin-right: auto;
+        }
+        .nav-brand span { color: var(--accent); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text2);
+            text-decoration: none;
+            padding: 7px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { background: var(--bg2); color: var(--text); }
+        .nav-links a.active { background: var(--bg2); color: var(--text); font-weight: 500; }
+        .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: var(--text2);
+            background: none;
+            border: 1px solid var(--border2);
+            border-radius: 8px;
+            padding: 7px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .theme-btn:hover { background: var(--bg2); color: var(--text); }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 20px; height: 1.5px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .mobile-menu {
+            position: fixed;
+            top: var(--nav-h); left: 0; right: 0;
+            z-index: 999;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px 20px;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-size: 15px;
+            color: var(--text2);
+            text-decoration: none;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.15s;
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { background: var(--bg2); color: var(--text); }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            padding: calc(var(--nav-h) + 60px) 32px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .page-header-left {}
+        .section-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .page-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: var(--text);
+            line-height: 1;
+        }
+        .page-title span { color: var(--accent); }
+        .page-desc {
+            font-size: 15px;
+            color: var(--text2);
+            margin-top: 12px;
+            max-width: 420px;
+        }
+        /* ── GAMES GRID ── */
+        .games-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px 80px;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* ── GAME CARD ── */
+        .game-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+        }
+        .game-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(0,0,0,0.09);
+        }
+
+        /* Game logo banner */
+        .game-banner {
+            position: relative;
+            height: 160px;
+            overflow: hidden;
+            background: var(--bg2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .game-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .game-card:hover .game-banner img { transform: scale(1.05); }
+        .game-banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+        }
+        .game-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .game-visit-btn {
+            position: absolute;
+            bottom: 12px; right: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: all 0.25s;
+        }
+        .game-card:hover .game-visit-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .game-visit-btn:hover { background: rgba(255,255,255,0.28); }
+
+        /* Game body */
+        .game-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .game-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.4px;
+            margin-bottom: 8px;
+        }
+        .game-desc {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.65;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* 3D Model viewer */
+        .model-section {
+            margin-top: 16px;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+        .model-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .model-label::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        model-viewer {
+            width: 100%;
+            height: 240px;
+            border-radius: 12px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            --poster-color: transparent;
+        }
+
+        /* ── DIVIDER ── */
+        .section-divider {
+            height: 1px;
+            background: var(--border);
+            max-width: 1100px;
+            margin: 0 auto 0;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 40px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+        .footer-brand span { color: var(--accent); }
+        .footer-copy { font-size: 13px; color: var(--text3); }
+        .footer-socials { display: flex; gap: 8px; }
+        .social-pill {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        .social-pill:hover {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-links, .theme-btn { display: none; }
+            .hamburger { display: flex; }
+            .page-header { padding: calc(var(--nav-h) + 32px) 20px 32px; }
+            .games-wrapper { padding: 0 20px 60px; }
+            .games-grid { grid-template-columns: 1fr; gap: 16px; }
+            footer { flex-direction: column; text-align: center; padding: 32px 20px; }
+            .footer-socials { justify-content: center; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="game.html">Game</a>
-                    </li>
-                </ul>
-                <button class="btn btn-theme" id="themeToggle">
-                    <i id="theme-icon" class="bi bi-moon"></i> Mode
-                </button>
-            </div>
-        </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">Kent<span>.</span>dev</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="game.html" class="active">Game</a></li>
+        </ul>
+        <button class="theme-btn" id="themeToggle">
+            <i id="theme-icon" class="bi bi-moon"></i> Theme
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
-    <div class="container mt-5 pt-5">
-        <h2 class="text-center mb-4 mt-5 pt-4">MY GAMES</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="game-card">
-                    <div class="game-img">
-                        <img src="genshinlogo.png" alt="genshinlogo" class="img-fluid">
-                        <div class="game-links">
-                            <a href="https://akasha.cv/profile/813277589" class="btn btn-sm btn-primary">Details</a>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3>Genshin Impact</h3>
-                        <p>Open-world action RPG developed and published by HoYoverse for the PC, iOS/Android, PS4/PS5, and Xbox Series X|S platforms. The game is free-to-play with a gacha monetization system in the form of Wishes.</p>
-                        <div class="model-container">
-                            <model-viewer 
-                                src="genshin_impact__lumine.glb" alt="Lumine from Genshin Impact"
-                                camera-controls
-                                auto-rotate
-                                camera-orbit="45deg 55deg 100.5m" field-of-view="30deg"  interaction-prompt="none" shadow-intensity="1"
-                                ar
-                                ar-modes="webxr scene-viewer quick-look">
-                            </model-viewer>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="game-card">
-                    <div class="game-img">
-                        <img src="valorantlogo.jpg" alt="valorantlogo" class="img-fluid">
-                        <div class="game-links">
-                            <a href="https://tracker.gg/valorant/profile/riot/Lukky%234391" class="btn btn-sm btn-primary">Details</a>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3>Valorant</h3>
-                        <p>Competitive tactical shooter from the first-person perspective, featuring a cast of characters known as agents that each have their own unique set of abilities to create tactical opportunities developed by Riot.</p>
-                        <div class="model-container">
-                            <model-viewer 
-                                src="jett__valorant.glb" alt="Jett from Valorant"
-                                camera-controls
-                                auto-rotate
-                                camera-orbit="30deg 60deg 100.8m" field-of-view="35deg" interaction-prompt="none" shadow-intensity="1"
-                                ar
-                                ar-modes="webxr scene-viewer quick-look">
-                            </model-viewer>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Osu Card -->
-            <div class="col-md-4">
-                <div class="game-card">
-                    <div class="game-img">
-                        <img src="osulogo.jpg" alt="osulogos" class="img-fluid">
-                        <div class="game-links">
-                            <a href="https://osu.ppy.sh/users/20139512" class="btn btn-sm btn-primary">Details</a>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3>Osu</h3>
-                        <p>Freeware rhythm game originally created and self-published by Australian developer Dean Herbert. It was released for Microsoft Windows on 16 September 2007, with later ports to macOS, Linux, Android and iOS.</p>
-                        <div class="model-container">
-                            <model-viewer 
-                                src="catosu.glb" 
-                                alt="Osu Cat"
-                                camera-controls
-                                auto-rotate
-                                camera-orbit="20deg 45deg 100.2m" field-of-view="40deg" interaction-prompt="none" shadow-intensity="1"
-                                ar
-                                ar-modes="webxr scene-viewer quick-look">
-                            </model-viewer>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="game-card">
-                    <div class="game-img">
-                        <img src="aqwlogo.jpg" alt="aqwlogo" class="img-fluid">
-                        <div class="game-links">
-                            <a href="https://account.aq.com/CharPage?id=Lukky180504" class="btn btn-sm btn-primary">Details</a>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3>Adventure Quest Worlds</h3>
-                        <p>Massively multiplayer online role-playing game set in the world of Lore, where players traverse its landscape and engage in quests and battles against various monsters, all while interacting with or alongside other players and non-playable characters (NPCs)</p>
-                        <div class="model-container">
-                            <model-viewer 
-                                src="bulky_knight.glb" 
-                                alt="Knight from AQW"
-                                camera-controls
-                                auto-rotate
-                                camera-orbit="25deg 50deg 2m" field-of-view="30deg" interaction-prompt="none" 
-                                shadow-intensity="1"
-                                ar
-                                ar-modes="webxr scene-viewer quick-look">
-                            </model-viewer>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="game-card">
-                    <div class="game-img">
-                        <img src="hsrlogo.png" alt="hsrlogo" class="img-fluid">
-                        <div class="game-links">
-                            <a href="https://enka.network/hsr/825553408/" class="btn btn-sm btn-primary">Details</a>
-                        </div>
-                    </div>
-                    <div class="game-info">
-                        <h3>Honkai Star Rail</h3>
-                        <p>Role-playing games where players build up a lineup of characters and control a team of up to four in turn-based combat. In addition to various stats that affect characters' strength, each character has a combat type that affects the kind of damage dealt to targets</p>
-                        <div class="model-container">
-                            <model-viewer 
-                                src="kafka.glb" 
-                                alt="Kafka from Honkai Star Rail"
-                                camera-controls
-                                auto-rotate 
-                                camera-orbit="35deg 65deg 100.5m" field-of-view="30deg" interaction-prompt="none" shadow-intensity="1"
-                                ar
-                                ar-modes="webxr scene-viewer quick-look">
-                            </model-viewer>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html"><i class="bi bi-house" style="margin-right:8px"></i> Home</a>
+        <a href="game.html"><i class="bi bi-controller" style="margin-right:8px"></i> Game</a>
+        <a href="#" id="mobileTheme"><i class="bi bi-moon" id="mobileThemeIcon" style="margin-right:8px"></i> Toggle Theme</a>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="page-header-left">
+            <p class="section-label">Leisure</p>
+            <h1 class="page-title">My <span>Games</span></h1>
+            <p class="page-desc">Games I play in my free time — complete with 3D character models you can interact with.</p>
         </div>
     </div>
-    <footer class="social-footer">
-        <div class="container text-center">
-            <a href="https://www.instagram.com/k3ntim/" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="https://github.com/KentRichardPurnomo" class="social-icon"><i class="bi bi-github"></i></a>
-            <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5?si=614b35742f1941d7" class="social-icon"><i class="bi bi-spotify"></i></a>
-            <a href="https://www.youtube.com/@lukky1804" class="social-icon"><i class="bi bi-youtube"></i></a>
-            <a href="https://www.tiktok.com/@lukky1804" class="social-icon"><i class="bi bi-tiktok"></i></a>
+
+    <div class="section-divider"></div>
+
+    <!-- GAMES GRID -->
+    <div class="games-wrapper">
+        <div class="games-grid" style="margin-top: 32px;">
+
+            <!-- Genshin Impact -->
+            <div class="game-card">
+                <div class="game-banner">
+                    <img src="genshinlogo.png" alt="Genshin Impact">
+                    <div class="game-banner-overlay"></div>
+                    <span class="game-badge">Open World RPG</span>
+                    <a href="https://akasha.cv/profile/813277589" class="game-visit-btn" target="_blank">
+                        <i class="bi bi-box-arrow-up-right"></i> My Profile
+                    </a>
+                </div>
+                <div class="game-body">
+                    <h3 class="game-title">Genshin Impact</h3>
+                    <p class="game-desc">Open-world action RPG developed and published by HoYoverse. Free-to-play with a gacha system across PC, iOS/Android, PS4/PS5, and Xbox Series X|S.</p>
+                    <div class="model-section">
+                        <p class="model-label">3D Character — Lumine</p>
+                        <model-viewer
+                            src="genshin_impact__lumine.glb"
+                            alt="Lumine from Genshin Impact"
+                            camera-controls
+                            auto-rotate
+                            camera-orbit="45deg 55deg 100.5m"
+                            field-of-view="30deg"
+                            interaction-prompt="none"
+                            shadow-intensity="1"
+                            ar ar-modes="webxr scene-viewer quick-look">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valorant -->
+            <div class="game-card">
+                <div class="game-banner">
+                    <img src="valorantlogo.jpg" alt="Valorant">
+                    <div class="game-banner-overlay"></div>
+                    <span class="game-badge">Tactical Shooter</span>
+                    <a href="https://tracker.gg/valorant/profile/riot/Lukky%234391" class="game-visit-btn" target="_blank">
+                        <i class="bi bi-box-arrow-up-right"></i> My Profile
+                    </a>
+                </div>
+                <div class="game-body">
+                    <h3 class="game-title">Valorant</h3>
+                    <p class="game-desc">Competitive tactical first-person shooter featuring agents with unique abilities. Developed by Riot Games, designed for strategic team play.</p>
+                    <div class="model-section">
+                        <p class="model-label">3D Character — Jett</p>
+                        <model-viewer
+                            src="jett__valorant.glb"
+                            alt="Jett from Valorant"
+                            camera-controls
+                            auto-rotate
+                            camera-orbit="30deg 60deg 100.8m"
+                            field-of-view="35deg"
+                            interaction-prompt="none"
+                            shadow-intensity="1"
+                            ar ar-modes="webxr scene-viewer quick-look">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Osu -->
+            <div class="game-card">
+                <div class="game-banner">
+                    <img src="osulogo.jpg" alt="Osu">
+                    <div class="game-banner-overlay"></div>
+                    <span class="game-badge">Rhythm Game</span>
+                    <a href="https://osu.ppy.sh/users/20139512" class="game-visit-btn" target="_blank">
+                        <i class="bi bi-box-arrow-up-right"></i> My Profile
+                    </a>
+                </div>
+                <div class="game-body">
+                    <h3 class="game-title">Osu!</h3>
+                    <p class="game-desc">Freeware rhythm game originally created by Dean Herbert. Released for Windows in 2007, with ports to macOS, Linux, Android and iOS.</p>
+                    <div class="model-section">
+                        <p class="model-label">3D Character — Osu Cat</p>
+                        <model-viewer
+                            src="catosu.glb"
+                            alt="Osu Cat"
+                            camera-controls
+                            auto-rotate
+                            camera-orbit="20deg 45deg 100.2m"
+                            field-of-view="40deg"
+                            interaction-prompt="none"
+                            shadow-intensity="1"
+                            ar ar-modes="webxr scene-viewer quick-look">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adventure Quest Worlds -->
+            <div class="game-card">
+                <div class="game-banner">
+                    <img src="aqwlogo.jpg" alt="Adventure Quest Worlds">
+                    <div class="game-banner-overlay"></div>
+                    <span class="game-badge">MMORPG</span>
+                    <a href="https://account.aq.com/CharPage?id=Lukky180504" class="game-visit-btn" target="_blank">
+                        <i class="bi bi-box-arrow-up-right"></i> My Profile
+                    </a>
+                </div>
+                <div class="game-body">
+                    <h3 class="game-title">Adventure Quest Worlds</h3>
+                    <p class="game-desc">Massively multiplayer online RPG set in the world of Lore. Players traverse landscapes, complete quests, and battle monsters alongside other players.</p>
+                    <div class="model-section">
+                        <p class="model-label">3D Character — Bulky Knight</p>
+                        <model-viewer
+                            src="bulky_knight.glb"
+                            alt="Knight from AQW"
+                            camera-controls
+                            auto-rotate
+                            camera-orbit="25deg 50deg 2m"
+                            field-of-view="30deg"
+                            interaction-prompt="none"
+                            shadow-intensity="1"
+                            ar ar-modes="webxr scene-viewer quick-look">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Honkai Star Rail -->
+            <div class="game-card">
+                <div class="game-banner">
+                    <img src="hsrlogo.png" alt="Honkai Star Rail">
+                    <div class="game-banner-overlay"></div>
+                    <span class="game-badge">Turn-Based RPG</span>
+                    <a href="https://enka.network/hsr/825553408/" class="game-visit-btn" target="_blank">
+                        <i class="bi bi-box-arrow-up-right"></i> My Profile
+                    </a>
+                </div>
+                <div class="game-body">
+                    <h3 class="game-title">Honkai: Star Rail</h3>
+                    <p class="game-desc">Turn-based RPG where players build a team of up to four characters, each with unique combat types and abilities that affect damage dealt to targets.</p>
+                    <div class="model-section">
+                        <p class="model-label">3D Character — Kafka</p>
+                        <model-viewer
+                            src="kafka.glb"
+                            alt="Kafka from Honkai Star Rail"
+                            camera-controls
+                            auto-rotate
+                            camera-orbit="35deg 65deg 100.5m"
+                            field-of-view="30deg"
+                            interaction-prompt="none"
+                            shadow-intensity="1"
+                            ar ar-modes="webxr scene-viewer quick-look">
+                        </model-viewer>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">Kent<span>.</span>dev</div>
+        <p class="footer-copy">© 2025 Kent Richard Purnomo</p>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/k3ntim/" class="social-pill" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://github.com/KentRichardPurnomo" class="social-pill" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5" class="social-pill" target="_blank"><i class="bi bi-spotify"></i></a>
+            <a href="https://www.youtube.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-youtube"></i></a>
+            <a href="https://www.tiktok.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-tiktok"></i></a>
         </div>
     </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // ── THEME ──
+        const html = document.documentElement;
+        const themeBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const mobileTheme = document.getElementById('mobileTheme');
+        const mobileThemeIcon = document.getElementById('mobileThemeIcon');
+
+        function setTheme(dark) {
+            html.setAttribute('data-theme', dark ? 'dark' : 'light');
+            const cls = dark ? 'bi-sun' : 'bi-moon';
+            themeIcon.className = 'bi ' + cls;
+            mobileThemeIcon.className = 'bi ' + cls;
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+        }
+
+        if (localStorage.getItem('theme') === 'dark') setTheme(true);
+
+        themeBtn.addEventListener('click', () => setTheme(html.getAttribute('data-theme') !== 'dark'));
+        mobileTheme.addEventListener('click', (e) => {
+            e.preventDefault();
+            setTheme(html.getAttribute('data-theme') !== 'dark');
+        });
+
+        // ── HAMBURGER ──
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>

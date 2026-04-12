@@ -1,354 +1,1072 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kent Richard Purnomo</title>
-    <link rel="icon" href="1.jpg">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f3ef;
+            --bg2: #eceae4;
+            --surface: #ffffff;
+            --text: #1a1814;
+            --text2: #6b6760;
+            --text3: #9e9b96;
+            --accent: #2d2aad;
+            --accent2: #e8e7fc;
+            --accent3: #c5c3f8;
+            --border: rgba(0,0,0,0.08);
+            --border2: rgba(0,0,0,0.14);
+            --tag-bg: #1a1814;
+            --tag-text: #f5f3ef;
+            --nav-h: 64px;
+            --sub-h: 48px;
+        }
+        [data-theme="dark"] {
+            --bg: #111110;
+            --bg2: #1a1916;
+            --surface: #1f1e1c;
+            --text: #f0ede8;
+            --text2: #9e9b96;
+            --text3: #5c5a56;
+            --accent: #7977e8;
+            --accent2: #1e1d3a;
+            --accent3: #2d2b5c;
+            --border: rgba(255,255,255,0.07);
+            --border2: rgba(255,255,255,0.12);
+            --tag-bg: #f0ede8;
+            --tag-text: #1a1814;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            height: var(--nav-h);
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            gap: 16px;
+            backdrop-filter: blur(12px);
+        }
+        .nav-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            margin-right: auto;
+        }
+        .nav-brand span { color: var(--accent); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text2);
+            text-decoration: none;
+            padding: 7px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--bg2);
+            color: var(--text);
+        }
+        .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text2);
+            background: none;
+            border: 1px solid var(--border2);
+            border-radius: 8px;
+            padding: 7px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .theme-btn:hover {
+            background: var(--bg2);
+            color: var(--text);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 20px;
+            height: 1.5px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        .mobile-menu {
+            position: fixed;
+            top: var(--nav-h);
+            left: 0; right: 0;
+            z-index: 999;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px 20px;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-size: 15px;
+            color: var(--text2);
+            text-decoration: none;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.15s;
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { background: var(--bg2); color: var(--text); }
+
+        .sub-nav {
+            position: fixed;
+            top: var(--nav-h);
+            left: 0; right: 0;
+            z-index: 998;
+            height: var(--sub-h);
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 0 24px;
+        }
+        .sub-nav a {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text2);
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .sub-nav a:hover {
+            border-color: var(--border2);
+            color: var(--text);
+            background: var(--surface);
+        }
+        .hero {
+            min-height: 100vh;
+            padding: calc(var(--nav-h) + var(--sub-h) + 60px) 32px 80px;
+            display: flex;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            gap: 48px;
+        }
+        .hero-left { flex: 1; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent);
+            background: var(--accent2);
+            border: 1px solid var(--accent3);
+            border-radius: 999px;
+            padding: 5px 14px;
+            margin-bottom: 24px;
+            letter-spacing: 0.3px;
+        }
+        .hero-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        .hero-greeting {
+            font-size: 15px;
+            color: var(--text2);
+            margin-bottom: 8px;
+        }
+        .hero-name {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+        .hero-name span { color: var(--accent); }
+        .hero-tagline {
+            font-size: 16px;
+            color: var(--text2);
+            max-width: 420px;
+            line-height: 1.7;
+            margin-bottom: 36px;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--text);
+            color: var(--bg);
+        }
+        .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+        .btn-ghost {
+            background: none;
+            color: var(--text);
+            border: 1px solid var(--border2);
+        }
+        .btn-ghost:hover { background: var(--bg2); transform: translateY(-1px); }
+
+        .hero-right {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .avatar-wrap {
+            width: 200px;
+            height: 200px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--bg2);
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .avatar-initials {
+            font-family: 'Syne', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .hero-socials {
+            display: flex;
+            gap: 8px;
+        }
+        .social-pill {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        .social-pill:hover {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+            transform: translateY(-2px);
+        }
+        section {
+            padding: 80px 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--text);
+            margin-bottom: 48px;
+        }
+        .carousel-wrap {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border2);
+            background: var(--bg2);
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .carousel-slide {
+            min-width: 100%;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            display: block;
+            background: var(--surface);
+        }
+        .carousel-slide .placeholder {
+            width: 100%;
+            height: 360px;
+            background: var(--bg2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--text3);
+            font-size: 13px;
+        }
+        .carousel-slide .placeholder i { font-size: 36px; }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 16px;
+            pointer-events: none;
+        }
+        .carousel-btn {
+            pointer-events: all;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            color: var(--text);
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            backdrop-filter: blur(8px);
+        }
+        .carousel-btn:hover { background: var(--text); color: var(--bg); }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 14px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--border2);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 12px;
+        }
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 8px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .skill-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+        }
+        .skill-icon-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text2);
+        }
+        .skill-icon-wrap img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .skill-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text2);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text2);
+            background: none;
+            border: 1px solid var(--border2);
+            border-radius: 999px;
+            padding: 7px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .project-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+        }
+        .project-card.hidden { display: none; }
+        .project-thumb {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            background: var(--bg2);
+        }
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .project-card:hover .project-thumb img { transform: scale(1.05); }
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .project-overlay a {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 8px;
+            padding: 9px 20px;
+            text-decoration: none;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .project-overlay a:hover { background: rgba(255,255,255,0.28); }
+        .project-body {
+            padding: 20px;
+        }
+        .project-type {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .project-desc {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.65;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .tag {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: var(--bg2);
+            color: var(--text2);
+            border: 1px solid var(--border);
+        }
+
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 40px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+        .footer-brand span { color: var(--accent); }
+        .footer-copy {
+            font-size: 13px;
+            color: var(--text3);
+        }
+        .footer-socials {
+            display: flex;
+            gap: 8px;
+        }
+        .section-divider {
+            height: 1px;
+            background: var(--border);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .nav-links, .theme-btn { display: none; }
+            .hamburger { display: flex; }
+            .hero {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                padding-top: calc(var(--nav-h) + var(--sub-h) + 40px);
+                padding-left: 20px;
+                padding-right: 20px;
+                gap: 32px;
+            }
+            .hero-right {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .avatar-wrap { width: 100px; height: 100px; border-radius: 16px; }
+            .avatar-initials { font-size: 28px; }
+            section { padding: 60px 20px; }
+            .skills-grid { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 8px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            footer { flex-direction: column; text-align: center; padding: 32px 20px; }
+            .footer-socials { justify-content: center; }
+            .sub-nav { gap: 2px; padding: 0 12px; overflow-x: auto; justify-content: flex-start; }
+            .sub-nav a { white-space: nowrap; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar { padding: 0 16px; }
+            .hero-btns { flex-direction: column; }
+            .btn { justify-content: center; }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="game.html">Game</a>
-                    </li>
-                </ul>
-                <button class="btn btn-theme" id="themeToggle">
-                    <i id="theme-icon" class="bi bi-moon"></i> Theme
-                </button>
-            </div>
-        </div>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">Kent<span>.</span>dev</a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="game.html">Game</a></li>
+        </ul>
+        <button class="theme-btn" id="themeToggle">
+            <i id="theme-icon" class="bi bi-moon"></i> Theme
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
-
-    <!-- Sub Navbar -->
-     <nav class="navbar navbar-expand-lg sub-navbar fixed-top">
-        <div class="container justify-content-center">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#sertifikat">@Sertifikat</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills">@Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">@MyProject</a></li>
-            </ul>
-        </div>
-     </nav>
-
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-text">
-            <p>Hello !</p>
-            <p>I'm <span>Kent Richard Purnomo</span></p>
-            <p>Welcome to My Website !!</p>
-        </div>
-        <div class="hero-image">
-            <img src="kenticon.jpg" class="profile-img" alt="Kent Ricard Purnomo">
-        </div>
-    </header>
-        
-    <!-- Carousel -->
-    <div class="container my-5">
-        <h1 class="text-center mb-5" id="sertifikat">Sertifikat</h1>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="sertif1.png" class="d-block w-100" alt="Gambar 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="sertif2.png" class="d-block w-100" alt="Gambar 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="sertif3.png" class="d-block w-100" alt="Gambar 3">
-                </div>
-                <div class="carousel-item">
-                    <img src="sertif4.png" class="d-block w-100" alt="Gambar 4">
-                </div>
-                <div class="carousel-item">
-                    <img src="sertif5.png" class="d-block w-100" alt="Gambar 5">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html"><i class="bi bi-house me-2"></i> Home</a>
+        <a href="game.html"><i class="bi bi-controller me-2"></i> Game</a>
+        <a href="#sertifikat"><i class="bi bi-patch-check me-2"></i> Sertifikat</a>
+        <a href="#skills"><i class="bi bi-code-slash me-2"></i> Skills</a>
+        <a href="#projects"><i class="bi bi-grid me-2"></i> MyProject</a>
+        <a href="#" id="mobileTheme"><i class="bi bi-moon me-2" id="mobileThemeIcon"></i> Toggle Theme</a>
+    </div>
+    <div class="sub-nav">
+        <a href="#sertifikat">@Sertifikat</a>
+        <a href="#skills">@Skills</a>
+        <a href="#projects">@MyProject</a>
     </div>
 
-    <!-- Skill Section -->
-     <section class="skills-section" id="skills">
-        <div class="container">
-            <h1 class="text-center mb-5">Skills</h1>
-            <div class="skills-grid">
-
-                <div class="skill-item">
-                    <div class="skill-icon html">
-                        <img src="html.png" alt="HTML">
-                    </div>
-                    <div class="skill-name">HTML</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon css">
-                        <img src="css.jpg" alt="CSS">
-                    </div>
-                    <div class="skill-name">CSS</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon c">
-                        <img src="c.png" alt="C">
-                    </div>
-                    <div class="skill-name">C</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon laravel">
-                        <img src="laravel.png" alt="Laravel">
-                    </div>
-                    <div class="skill-name">Laravel</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon mysql">
-                        <i class="bi bi-database" style="color: white;"></i>
-                    </div>
-                    <div class="skill-name">MySQL</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon php">
-                        <img src="php.png" alt="php">
-                    </div>
-                    <div class="skill-name">PHP</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon react">
-                        <img src="react.png" alt="React">
-                    </div>
-                    <div class="skill-name">React</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon tailwind">
-                        <img src="tailwind.png" alt="Tailwind">
-                    </div>
-                    <div class="skill-name">Tailwind</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon typescript">
-                        <img src="typescript.png" alt="Typescript">
-                    </div>
-                    <div class="skill-name">Typescript</div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon bootstrap">
-                        <i class="bi bi-bootstrap" style="color: white;"></i>
-                    </div>
-                    <div class="skill-name">Bootstrap</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon flutter">
-                       <img src="flutter.png" alt="Flutter">
-                    </div>
-                    <div class="skill-name">Flutter</div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon dart">
-                        <img src="dart.png" alt="Dart">
-                    </div>
-                    <div class="skill-name">Dart</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon figma">
-                        <img src="figma.png" alt="Figma">
-                    </div>
-                    <div class="skill-name">Figma</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon github">
-                        <i class="bi bi-github" style="color: white;"></i>
-                    </div>
-                    <div class="skill-name">Github</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon java">
-                        <i class="bi bi-cup-hot" style="color: white;"></i>
-                    </div>
-                    <div class="skill-name">Java</div>
-                </div>
-                
-                <div class="skill-item">
-                    <div class="skill-icon python">
-                        <img src="python.png" alt="Python">
-                    </div>
-                    <div class="skill-name">Python</div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon jupyternotebook">
-                        <img src="jupyternotebook.png"  alt="Jupyternotebook">
-                    </div>
-                    <div class="skill-name">Jupyter</div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon firebase">
-                        <img src="firebase.png"  alt="firebase">
-                    </div>
-                    <div class="skill-name">Firebase</div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon scikit">
-                        <img src="scikit.png"  alt="scikit">
-                    </div>
-                    <div class="skill-name">Scikit-Learn</div>
-                </div>
+    <header class="hero">
+        <div class="hero-left">
+            <div class="hero-badge">Open to Opportunities</div>
+            <p class="hero-greeting">Hello! 👋</p>
+            <h1 class="hero-name">Kent Richard<br><span>Purnomo</span></h1>
+            <p class="hero-tagline">Full-stack developer & mobile enthusiast. Building elegant digital experiences from web to mobile.</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="bi bi-grid-3x3-gap"></i> View Projects
+                </a>
+                <a href="https://github.com/KentRichardPurnomo" class="btn btn-ghost" target="_blank">
+                    <i class="bi bi-github"></i> GitHub
+                </a>
             </div>
         </div>
-     </section>
-
-    <!-- Projects Section -->
-    <section class="projects-section" id="projects">
-        <div class="container">
-            <h1 class="text-center mb-5">My Projects</h1>
-            
-            <!-- Project Filters -->
-            <div class="project-filters text-center mb-4">
-                <button class="btn btn-outline-primary active" data-filter="all">All</button>
-                <button class="btn btn-outline-primary" data-filter="web">Web</button>
-                <button class="btn btn-outline-primary" data-filter="mobile">Mobile</button>
+        <div class="hero-right">
+            <div class="avatar-wrap">
+                <img src="kenticon.jpg" alt="Kent Richard Purnomo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="avatar-initials" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:var(--accent2);">KR</div>
             </div>
-            
-            <div class="row">
-                <!-- Project 1 - ReuseMart Website -->
-                <div class="col-md-4 mb-4" data-category="web">
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="ReuseMartWeb.jpg" alt="Laundry Website" class="img-fluid">
-                            <div class="project-links">
-                                <a href="https://github.com/KentRichardPurnomo/P3L.git" class="btn btn-sm btn-primary">Visit</a>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>ReuseMart</h3>
-                            <p>A multi-role e-commerce and donation platform built with Laravel, enabling users to manage second-hand goods, handle transactions, schedule deliveries, manage warehouse stock, and support community donations.</p>
-                            <div class="project-tags">
-                                <span class="badge bg-dark ">Laravel</span>
-                                <span class="badge bg-dark">PHP</span>
-                                <span class="badge bg-dark">MySQL</span>
-                                <span class="badge bg-dark">Bootstrap</span>
-                            </div>
-                        </div>
+            <div class="hero-socials">
+                <a href="https://www.instagram.com/kentrichard_22/" class="social-pill" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/kent-richard-2133892ab/" class="social-pill" target="_blank"><i class="bi bi-linkedin"></i></a>
+                <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5" class="social-pill" target="_blank"><i class="bi bi-spotify"></i></a>
+                <a href="https://www.youtube.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-youtube"></i></a>
+                <a href="https://www.tiktok.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-tiktok"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="section-divider"></div>
+
+    <section id="sertifikat">
+        <p class="section-label">Achievements</p>
+        <h2 class="section-title">Sertifikat</h2>
+        <div class="carousel-wrap">
+            <div class="carousel-inner" id="carouselInner">
+                <div class="carousel-slide">
+                    <img src="sertif0.jpg" alt="Sertifikat 0" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 0</span></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="sertif1.png" alt="Sertifikat 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 1</span></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="sertif2.png" alt="Sertifikat 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 2</span></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="sertif3.png" alt="Sertifikat 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 3</span></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="sertif4.png" alt="Sertifikat 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 4</span></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="sertif5.png" alt="Sertifikat 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 5</span></div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="sertif6.png" alt="Sertifikat 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 6</span></div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn"><i class="bi bi-chevron-left"></i></button>
+                <button class="carousel-btn" id="nextBtn"><i class="bi bi-chevron-right"></i></button>
+            </div>
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="skills">
+        <p class="section-label">Technologies</p>
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="html.png" alt="HTML" onerror="this.outerHTML='<i class=\'bi bi-filetype-html\'></i>'"></div>
+                <span class="skill-name">HTML</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="css.jpg" alt="CSS" onerror="this.outerHTML='<i class=\'bi bi-filetype-css\'></i>'"></div>
+                <span class="skill-name">CSS</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="c.png" alt="C" onerror="this.outerHTML='<i class=\'bi bi-code\'></i>'"></div>
+                <span class="skill-name">C</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="laravel.png" alt="Laravel" onerror="this.outerHTML='<i class=\'bi bi-code-slash\'></i>'"></div>
+                <span class="skill-name">Laravel</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><i class="bi bi-database"></i></div>
+                <span class="skill-name">MySQL</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="php.png" alt="PHP" onerror="this.outerHTML='<i class=\'bi bi-filetype-php\'></i>'"></div>
+                <span class="skill-name">PHP</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="react.png" alt="React" onerror="this.outerHTML='<i class=\'bi bi-arrow-repeat\'></i>'"></div>
+                <span class="skill-name">React</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="tailwind.png" alt="Tailwind" onerror="this.outerHTML='<i class=\'bi bi-wind\'></i>'"></div>
+                <span class="skill-name">Tailwind</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="typescript.png" alt="TypeScript" onerror="this.outerHTML='<i class=\'bi bi-filetype-tsx\'></i>'"></div>
+                <span class="skill-name">TypeScript</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><i class="bi bi-bootstrap"></i></div>
+                <span class="skill-name">Bootstrap</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="flutter.png" alt="Flutter" onerror="this.outerHTML='<i class=\'bi bi-phone\'></i>'"></div>
+                <span class="skill-name">Flutter</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="dart.png" alt="Dart" onerror="this.outerHTML='<i class=\'bi bi-hexagon\'></i>'"></div>
+                <span class="skill-name">Dart</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="figma.png" alt="Figma" onerror="this.outerHTML='<i class=\'bi bi-pentagon\'></i>'"></div>
+                <span class="skill-name">Figma</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><i class="bi bi-github"></i></div>
+                <span class="skill-name">GitHub</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><i class="bi bi-cup-hot"></i></div>
+                <span class="skill-name">Java</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="python.png" alt="Python" onerror="this.outerHTML='<i class=\'bi bi-filetype-py\'></i>'"></div>
+                <span class="skill-name">Python</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="jupyternotebook.png" alt="Jupyter" onerror="this.outerHTML='<i class=\'bi bi-journal-code\'></i>'"></div>
+                <span class="skill-name">Jupyter</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="firebase.png" alt="Firebase" onerror="this.outerHTML='<i class=\'bi bi-fire\'></i>'"></div>
+                <span class="skill-name">Firebase</span>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrap"><img src="scikit.png" alt="Scikit-Learn" onerror="this.outerHTML='<i class=\'bi bi-graph-up\'></i>'"></div>
+                <span class="skill-name">Scikit-Learn</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="projects">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">My Projects</h2>
+
+        <div class="filter-row">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+        </div>
+
+        <div class="projects-grid">
+
+            <div class="project-card" data-category="web">
+                <div class="project-thumb">
+                    <img src="ReuseMartWeb.jpg" alt="ReuseMart Website">
+                    <div class="project-overlay">
+                        <a href="https://github.com/KentRichardPurnomo/P3L.git" target="_blank">
+                            <i class="bi bi-github"></i> View Source
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Project 2 - ReuseMart App -->
-                <div class="col-md-4 mb-4" data-category="mobile">
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="ReuseMartMob.jpg" alt="ReuseMart App" class="img-fluid">
-                            <div class="project-links">
-                                <a href="https://github.com/Bonaventura-Abhinaya/ReuseMart-Mobile-P3L" class="btn btn-sm btn-primary">Visit</a>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>ReuseMart App</h3>
-                            <p>A mobile companion app for ReuseMart, built with Flutter, enabling buyers and consignors to manage second-hand goods, track transactions, receive notifications, and participate in donations directly from their smartphones.</p>
-                            <div class="project-tags">
-                                <span class="badge bg-dark">Flutter</span>
-                                <span class="badge bg-dark">Dart</span>
-                                <span class="badge bg-dark">Firebase</span>
-                            </div>
-                        </div>
+                <div class="project-body">
+                    <p class="project-type">Web · Laravel</p>
+                    <h3 class="project-title">ReuseMart</h3>
+                    <p class="project-desc">A multi-role e-commerce and donation platform built with Laravel, enabling users to manage second-hand goods, handle transactions, schedule deliveries, manage warehouse stock, and support community donations.</p>
+                    <div class="project-tags">
+                        <span class="tag">Laravel</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Bootstrap</span>
                     </div>
                 </div>
-                
-                <!-- Project 3 - Atma Game -->
-                <div class="col-md-4 mb-4" data-category="web">
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="atmagame.png" alt="Atama Game" class="img-fluid">
-                            <div class="project-links">
-                                <a href="https://github.com/KentRichardPurnomo/PW10_A_11668" class="btn btn-sm btn-primary">Visit</a>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Atma Educational Game</h3>
-                            <p>Interactive web-based educational game designed to teach programming concepts through puzzle-solving and challenges.</p>
-                            <div class="project-tags">
-                                <span class="badge bg-dark">HTML</span>
-                                <span class="badge bg-dark">CSS3</span>
-                                <span class="badge bg-dark">JavaScript</span>
-                                <span class="badge bg-dark">Canvas API</span>
-                            </div>
-                        </div>
+            </div>
+
+            <div class="project-card" data-category="mobile">
+                <div class="project-thumb">
+                    <img src="ReuseMartMob.jpg" alt="ReuseMart App">
+                    <div class="project-overlay">
+                        <a href="https://github.com/Bonaventura-Abhinaya/ReuseMart-Mobile-P3L" target="_blank">
+                            <i class="bi bi-github"></i> View Source
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Project 4 - Dragon Fruit Prediction -->
-                <div class="col-md-4 mb-4" data-category="web">
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="prediksi.png" alt="Dragon Fruit Prediction" class="img-fluid">
-                            <div class="project-links">
-                                <a href="https://github.com/KentRichardPurnomo/Tugas6_B_11668.git" class="btn btn-sm btn-primary">Visit</a>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Dragon Fruit Ripeness Prediction</h3>
-                            <p>Machine learning model that analyzes images of dragon fruits to predict their ripeness level using computer vision techniques.</p>
-                            <div class="project-tags">
-                                <span class="badge bg-dark">Python</span>
-                                <span class="badge bg-dark">Scikit-learn</span>
-                                <span class="badge bg-dark">Jupyter Notebook</span>
-                            </div>
-                        </div>
+                <div class="project-body">
+                    <p class="project-type">Mobile · Flutter</p>
+                    <h3 class="project-title">ReuseMart App</h3>
+                    <p class="project-desc">A mobile companion app for ReuseMart built with Flutter, enabling buyers and consignors to manage second-hand goods, track transactions, receive notifications, and participate in donations from their smartphones.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Dart</span>
+                        <span class="tag">Firebase</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-thumb">
+                    <img src="atmagame.png" alt="Atma Educational Game">
+                    <div class="project-overlay">
+                        <a href="https://github.com/KentRichardPurnomo/PW10_A_11668" target="_blank">
+                            <i class="bi bi-github"></i> View Source
+                        </a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-type">Web · JavaScript</p>
+                    <h3 class="project-title">Atma Educational Game</h3>
+                    <p class="project-desc">Interactive web-based educational game designed to teach programming concepts through puzzle-solving and challenges.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Canvas API</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-thumb">
+                    <img src="prediksi.png" alt="Dragon Fruit Prediction">
+                    <div class="project-overlay">
+                        <a href="https://github.com/KentRichardPurnomo/Tugas6_B_11668.git" target="_blank">
+                            <i class="bi bi-github"></i> View Source
+                        </a>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-type">Web · Machine Learning</p>
+                    <h3 class="project-title">Dragon Fruit Ripeness Prediction</h3>
+                    <p class="project-desc">Machine learning model that analyzes images of dragon fruits to predict their ripeness level using computer vision techniques.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">Jupyter</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="social-footer">
-        <div class="container text-center">
-            <a href="https://www.instagram.com/k3ntim/" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="https://github.com/KentRichardPurnomo" class="social-icon"><i class="bi bi-github"></i></a>
-            <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5?si=614b35742f1941d7" class="social-icon"><i class="bi bi-spotify"></i></a>
-            <a href="https://www.youtube.com/@lukky1804" class="social-icon"><i class="bi bi-youtube"></i></a>
-            <a href="https://www.tiktok.com/@lukky1804" class="social-icon"><i class="bi bi-tiktok"></i></a>
+    <footer>
+        <div class="footer-brand">Kent<span>.</span>dev</div>
+        <p class="footer-copy">© 2025 Kent Richard Purnomo</p>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/kentrichard_22/" class="social-pill" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/kent-richard-2133892ab/" class="social-pill" target="_blank"><i class="bi bi-linkedin"></i></a>
+            <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5" class="social-pill" target="_blank"><i class="bi bi-spotify"></i></a>
+            <a href="https://www.youtube.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-youtube"></i></a>
+            <a href="https://www.tiktok.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-tiktok"></i></a>
         </div>
     </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+
+    <script>
+        const html = document.documentElement;
+        const themeBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const mobileTheme = document.getElementById('mobileTheme');
+        const mobileThemeIcon = document.getElementById('mobileThemeIcon');
+
+        function setTheme(dark) {
+            html.setAttribute('data-theme', dark ? 'dark' : 'light');
+            const cls = dark ? 'bi-sun' : 'bi-moon';
+            themeIcon.className = 'bi ' + cls;
+            mobileThemeIcon.className = 'bi ' + cls + ' me-2';
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') setTheme(true);
+
+        themeBtn.addEventListener('click', () => {
+            setTheme(html.getAttribute('data-theme') !== 'dark');
+        });
+        mobileTheme.addEventListener('click', (e) => {
+            e.preventDefault();
+            setTheme(html.getAttribute('data-theme') !== 'dark');
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+
+        mobileMenu.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        const inner = document.getElementById('carouselInner');
+        const dotsWrap = document.getElementById('carouselDots');
+        const slides = inner.querySelectorAll('.carousel-slide');
+        let current = 0;
+        let autoTimer;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+        });
+
+        function goTo(n) {
+            current = (n + slides.length) % slides.length;
+            inner.style.transform = `translateX(-${current * 100}%)`;
+            dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+            });
+        }
+
+        function startAuto() {
+            autoTimer = setInterval(() => goTo(current + 1), 4000);
+        }
+
+        function resetAuto() {
+            clearInterval(autoTimer);
+            startAuto();
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+        document.getElementById('nextBtn').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+        startAuto();
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.project-card').forEach(card => {
+                    const match = filter === 'all' || card.dataset.category === filter;
+                    card.classList.toggle('hidden', !match);
+                });
+            });
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const subLinks = document.querySelectorAll('.sub-nav a');
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    subLinks.forEach(a => {
+                        a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -40% 0px' });
+
+        sections.forEach(s => obs.observe(s));
+    </script>
 </body>
 </html>
