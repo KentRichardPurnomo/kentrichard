@@ -1,1072 +1,476 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kent Richard Purnomo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <title>Portofolio-Kent Richard Purnomo</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            --bg: #f5f3ef;
-            --bg2: #eceae4;
-            --surface: #ffffff;
-            --text: #1a1814;
-            --text2: #6b6760;
-            --text3: #9e9b96;
-            --accent: #2d2aad;
-            --accent2: #e8e7fc;
-            --accent3: #c5c3f8;
-            --border: rgba(0,0,0,0.08);
-            --border2: rgba(0,0,0,0.14);
-            --tag-bg: #1a1814;
-            --tag-text: #f5f3ef;
-            --nav-h: 64px;
-            --sub-h: 48px;
+        :root { background-color: #0C0C0C; }
+        html, body, #root {
+            margin: 0; padding: 0; box-sizing: border-box;
+            background-color: #0C0C0C; color: #D7E2EA;
+            overflow-x: clip; font-family: 'Kanit', sans-serif;
+            scroll-behavior: smooth;
         }
-        [data-theme="dark"] {
-            --bg: #111110;
-            --bg2: #1a1916;
-            --surface: #1f1e1c;
-            --text: #f0ede8;
-            --text2: #9e9b96;
-            --text3: #5c5a56;
-            --accent: #7977e8;
-            --accent2: #1e1d3a;
-            --accent3: #2d2b5c;
-            --border: rgba(255,255,255,0.07);
-            --border2: rgba(255,255,255,0.12);
-            --tag-bg: #f0ede8;
-            --tag-text: #1a1814;
+        .hero-heading {
+            background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 16px;
-            line-height: 1.6;
-            transition: background 0.3s, color 0.3s;
-        }
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            height: var(--nav-h);
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 32px;
-            gap: 16px;
-            backdrop-filter: blur(12px);
-        }
-        .nav-brand {
-            font-family: 'Syne', sans-serif;
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-            margin-right: auto;
-        }
-        .nav-brand span { color: var(--accent); }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            list-style: none;
-        }
-        .nav-links a {
-            font-size: 14px;
-            font-weight: 400;
-            color: var(--text2);
-            text-decoration: none;
-            padding: 7px 16px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            background: var(--bg2);
-            color: var(--text);
-        }
-        .theme-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            color: var(--text2);
-            background: none;
-            border: 1px solid var(--border2);
-            border-radius: 8px;
-            padding: 7px 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .theme-btn:hover {
-            background: var(--bg2);
-            color: var(--text);
-        }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            border: 1px solid var(--border2);
-            background: none;
-        }
-        .hamburger span {
-            display: block;
-            width: 20px;
-            height: 1.5px;
-            background: var(--text);
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-        .mobile-menu {
-            position: fixed;
-            top: var(--nav-h);
-            left: 0; right: 0;
-            z-index: 999;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 24px 20px;
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .mobile-menu.open { display: flex; }
-        .mobile-menu a {
-            font-size: 15px;
-            color: var(--text2);
-            text-decoration: none;
-            padding: 11px 12px;
-            border-radius: 8px;
-            border-bottom: 1px solid var(--border);
-            transition: all 0.15s;
-        }
-        .mobile-menu a:last-child { border-bottom: none; }
-        .mobile-menu a:hover { background: var(--bg2); color: var(--text); }
-
-        .sub-nav {
-            position: fixed;
-            top: var(--nav-h);
-            left: 0; right: 0;
-            z-index: 998;
-            height: var(--sub-h);
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 0 24px;
-        }
-        .sub-nav a {
-            font-size: 13px;
-            font-weight: 400;
-            color: var(--text2);
-            text-decoration: none;
-            padding: 6px 16px;
-            border-radius: 999px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-        .sub-nav a:hover {
-            border-color: var(--border2);
-            color: var(--text);
-            background: var(--surface);
-        }
-        .hero {
-            min-height: 100vh;
-            padding: calc(var(--nav-h) + var(--sub-h) + 60px) 32px 80px;
-            display: flex;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-            gap: 48px;
-        }
-        .hero-left { flex: 1; }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--accent);
-            background: var(--accent2);
-            border: 1px solid var(--accent3);
-            border-radius: 999px;
-            padding: 5px 14px;
-            margin-bottom: 24px;
-            letter-spacing: 0.3px;
-        }
-        .hero-badge::before {
-            content: '';
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-        .hero-greeting {
-            font-size: 15px;
-            color: var(--text2);
-            margin-bottom: 8px;
-        }
-        .hero-name {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -2px;
-            color: var(--text);
-            margin-bottom: 16px;
-        }
-        .hero-name span { color: var(--accent); }
-        .hero-tagline {
-            font-size: 16px;
-            color: var(--text2);
-            max-width: 420px;
-            line-height: 1.7;
-            margin-bottom: 36px;
-        }
-        .hero-btns {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 12px 24px;
-            border-radius: 10px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-primary {
-            background: var(--text);
-            color: var(--bg);
-        }
-        .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-        .btn-ghost {
-            background: none;
-            color: var(--text);
-            border: 1px solid var(--border2);
-        }
-        .btn-ghost:hover { background: var(--bg2); transform: translateY(-1px); }
-
-        .hero-right {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-        .avatar-wrap {
-            width: 200px;
-            height: 200px;
-            border-radius: 24px;
-            overflow: hidden;
-            background: var(--bg2);
-            border: 1px solid var(--border2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .avatar-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .avatar-initials {
-            font-family: 'Syne', sans-serif;
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--accent);
-        }
-        .hero-socials {
-            display: flex;
-            gap: 8px;
-        }
-        .social-pill {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            border: 1px solid var(--border2);
-            background: var(--surface);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text2);
-            text-decoration: none;
-            font-size: 15px;
-            transition: all 0.2s;
-        }
-        .social-pill:hover {
-            background: var(--text);
-            color: var(--bg);
-            border-color: var(--text);
-            transform: translateY(-2px);
-        }
-        section {
-            padding: 80px 32px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .section-label {
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(28px, 4vw, 44px);
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            color: var(--text);
-            margin-bottom: 48px;
-        }
-        .carousel-wrap {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border2);
-            background: var(--bg2);
-        }
-        .carousel-inner {
-            display: flex;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .carousel-slide {
-            min-width: 100%;
-        }
-        .carousel-slide img {
-            width: 100%;
-            height: auto;
-            max-height: 520px;
-            object-fit: contain;
-            display: block;
-            background: var(--surface);
-        }
-        .carousel-slide .placeholder {
-            width: 100%;
-            height: 360px;
-            background: var(--bg2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: var(--text3);
-            font-size: 13px;
-        }
-        .carousel-slide .placeholder i { font-size: 36px; }
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 16px;
-            pointer-events: none;
-        }
-        .carousel-btn {
-            pointer-events: all;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--surface);
-            border: 1px solid var(--border2);
-            color: var(--text);
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            backdrop-filter: blur(8px);
-        }
-        .carousel-btn:hover { background: var(--text); color: var(--bg); }
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            padding: 14px;
-        }
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--border2);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 12px;
-        }
-        .skill-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 8px 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-            cursor: default;
-        }
-        .skill-card:hover {
-            border-color: var(--border2);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
-        }
-        .skill-icon-wrap {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: var(--bg2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: var(--text2);
-        }
-        .skill-icon-wrap img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-        .skill-name {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--text2);
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        .filter-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 36px;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            color: var(--text2);
-            background: none;
-            border: 1px solid var(--border2);
-            border-radius: 999px;
-            padding: 7px 18px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--text);
-            color: var(--bg);
-            border-color: var(--text);
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .project-card:hover {
-            border-color: var(--border2);
-            transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
-        }
-        .project-card.hidden { display: none; }
-        .project-thumb {
-            position: relative;
-            overflow: hidden;
-            height: 200px;
-            background: var(--bg2);
-        }
-        .project-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
-        }
-        .project-card:hover .project-thumb img { transform: scale(1.05); }
-        .project-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.55);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .project-card:hover .project-overlay { opacity: 1; }
-        .project-overlay a {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            color: #fff;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.35);
-            border-radius: 8px;
-            padding: 9px 20px;
-            text-decoration: none;
-            backdrop-filter: blur(4px);
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .project-overlay a:hover { background: rgba(255,255,255,0.28); }
-        .project-body {
-            padding: 20px;
-        }
-        .project-type {
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 6px;
-        }
-        .project-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-        .project-desc {
-            font-size: 13px;
-            color: var(--text2);
-            line-height: 1.65;
-            margin-bottom: 16px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .tag {
-            font-size: 11px;
-            font-weight: 500;
-            padding: 3px 10px;
-            border-radius: 999px;
-            background: var(--bg2);
-            color: var(--text2);
-            border: 1px solid var(--border);
-        }
-
-        footer {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            padding: 40px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .footer-brand {
-            font-family: 'Syne', sans-serif;
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--text);
-            letter-spacing: -0.5px;
-        }
-        .footer-brand span { color: var(--accent); }
-        .footer-copy {
-            font-size: 13px;
-            color: var(--text3);
-        }
-        .footer-socials {
-            display: flex;
-            gap: 8px;
-        }
-        .section-divider {
-            height: 1px;
-            background: var(--border);
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        @media (max-width: 768px) {
-            .nav-links, .theme-btn { display: none; }
-            .hamburger { display: flex; }
-            .hero {
-                flex-direction: column-reverse;
-                align-items: flex-start;
-                padding-top: calc(var(--nav-h) + var(--sub-h) + 40px);
-                padding-left: 20px;
-                padding-right: 20px;
-                gap: 32px;
-            }
-            .hero-right {
-                width: 100%;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .avatar-wrap { width: 100px; height: 100px; border-radius: 16px; }
-            .avatar-initials { font-size: 28px; }
-            section { padding: 60px 20px; }
-            .skills-grid { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); gap: 8px; }
-            .projects-grid { grid-template-columns: 1fr; }
-            footer { flex-direction: column; text-align: center; padding: 32px 20px; }
-            .footer-socials { justify-content: center; }
-            .sub-nav { gap: 2px; padding: 0 12px; overflow-x: auto; justify-content: flex-start; }
-            .sub-nav a { white-space: nowrap; }
-        }
-
-        @media (max-width: 480px) {
-            .navbar { padding: 0 16px; }
-            .hero-btns { flex-direction: column; }
-            .btn { justify-content: center; }
-        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0C0C0C; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
     </style>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@11.0.8/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand">Kent<span>.</span>dev</a>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="game.html">Game</a></li>
-        </ul>
-        <button class="theme-btn" id="themeToggle">
-            <i id="theme-icon" class="bi bi-moon"></i> Theme
-        </button>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </nav>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html"><i class="bi bi-house me-2"></i> Home</a>
-        <a href="game.html"><i class="bi bi-controller me-2"></i> Game</a>
-        <a href="#sertifikat"><i class="bi bi-patch-check me-2"></i> Sertifikat</a>
-        <a href="#skills"><i class="bi bi-code-slash me-2"></i> Skills</a>
-        <a href="#projects"><i class="bi bi-grid me-2"></i> MyProject</a>
-        <a href="#" id="mobileTheme"><i class="bi bi-moon me-2" id="mobileThemeIcon"></i> Toggle Theme</a>
-    </div>
-    <div class="sub-nav">
-        <a href="#sertifikat">@Sertifikat</a>
-        <a href="#skills">@Skills</a>
-        <a href="#projects">@MyProject</a>
-    </div>
+    <div id="root"></div>
 
-    <header class="hero">
-        <div class="hero-left">
-            <div class="hero-badge">Open to Opportunities</div>
-            <p class="hero-greeting">Hello! 👋</p>
-            <h1 class="hero-name">Kent Richard<br><span>Purnomo</span></h1>
-            <p class="hero-tagline">Full-stack developer & mobile enthusiast. Building elegant digital experiences from web to mobile.</p>
-            <div class="hero-btns">
-                <a href="#projects" class="btn btn-primary">
-                    <i class="bi bi-grid-3x3-gap"></i> View Projects
-                </a>
-                <a href="https://github.com/KentRichardPurnomo" class="btn btn-ghost" target="_blank">
-                    <i class="bi bi-github"></i> GitHub
-                </a>
-            </div>
-        </div>
-        <div class="hero-right">
-            <div class="avatar-wrap">
-                <img src="kenticon.jpg" alt="Kent Richard Purnomo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="avatar-initials" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; background:var(--accent2);">KR</div>
-            </div>
-            <div class="hero-socials">
-                <a href="https://www.instagram.com/kentrichard_22/" class="social-pill" target="_blank"><i class="bi bi-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/kent-richard-2133892ab/" class="social-pill" target="_blank"><i class="bi bi-linkedin"></i></a>
-                <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5" class="social-pill" target="_blank"><i class="bi bi-spotify"></i></a>
-                <a href="https://www.youtube.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-youtube"></i></a>
-                <a href="https://www.tiktok.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-tiktok"></i></a>
-            </div>
-        </div>
-    </header>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { motion, useScroll, useTransform, AnimatePresence } = window.Motion;
+        const ContactButton = ({ text = "Contact Me", href = "#" }) => (
+            <a href={href} className="inline-block rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base text-white font-medium uppercase tracking-widest outline outline-2 outline-white outline-offset-[-3px] transition-transform hover:scale-105 active:scale-95"
+                style={{
+                    background: 'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
+                    boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25), inset 4px 4px 12px #7721B1'
+                }}>
+                {text}
+            </a>
+        );
 
-    <div class="section-divider"></div>
+        const FadeIn = ({ children, delay = 0, duration = 0.7, x = 0, y = 30, className = "" }) => {
+            return (
+                <motion.div
+                    initial={{ opacity: 0, x, y }}
+                    whileInView={{ opacity: 1, x: 0, y: 0 }}
+                    viewport={{ once: true, margin: "50px", amount: 0 }}
+                    transition={{ duration, delay, ease: [0.25, 0.1, 0.25, 1] }}
+                    className={className}
+                >
+                    {children}
+                </motion.div>
+            );
+        };
 
-    <section id="sertifikat">
-        <p class="section-label">Achievements</p>
-        <h2 class="section-title">Sertifikat</h2>
-        <div class="carousel-wrap">
-            <div class="carousel-inner" id="carouselInner">
-                <div class="carousel-slide">
-                    <img src="sertif0.jpg" alt="Sertifikat 0" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 0</span></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="sertif1.png" alt="Sertifikat 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 1</span></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="sertif2.png" alt="Sertifikat 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 2</span></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="sertif3.png" alt="Sertifikat 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 3</span></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="sertif4.png" alt="Sertifikat 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 4</span></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="sertif5.png" alt="Sertifikat 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 5</span></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="sertif6.png" alt="Sertifikat 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="placeholder" style="display:none;"><i class="bi bi-patch-check"></i><span>Sertifikat 6</span></div>
-                </div>
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn" id="prevBtn"><i class="bi bi-chevron-left"></i></button>
-                <button class="carousel-btn" id="nextBtn"><i class="bi bi-chevron-right"></i></button>
-            </div>
-            <div class="carousel-dots" id="carouselDots"></div>
-        </div>
-    </section>
+        const Magnet = ({ children, padding = 150, strength = 3, className = "" }) => {
+            const containerRef = useRef(null);
+            const [position, setPosition] = useState({ x: 0, y: 0 });
+            const [isActive, setIsActive] = useState(false);
 
-    <div class="section-divider"></div>
-
-    <section id="skills">
-        <p class="section-label">Technologies</p>
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="html.png" alt="HTML" onerror="this.outerHTML='<i class=\'bi bi-filetype-html\'></i>'"></div>
-                <span class="skill-name">HTML</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="css.jpg" alt="CSS" onerror="this.outerHTML='<i class=\'bi bi-filetype-css\'></i>'"></div>
-                <span class="skill-name">CSS</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="c.png" alt="C" onerror="this.outerHTML='<i class=\'bi bi-code\'></i>'"></div>
-                <span class="skill-name">C</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="laravel.png" alt="Laravel" onerror="this.outerHTML='<i class=\'bi bi-code-slash\'></i>'"></div>
-                <span class="skill-name">Laravel</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><i class="bi bi-database"></i></div>
-                <span class="skill-name">MySQL</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="php.png" alt="PHP" onerror="this.outerHTML='<i class=\'bi bi-filetype-php\'></i>'"></div>
-                <span class="skill-name">PHP</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="react.png" alt="React" onerror="this.outerHTML='<i class=\'bi bi-arrow-repeat\'></i>'"></div>
-                <span class="skill-name">React</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="tailwind.png" alt="Tailwind" onerror="this.outerHTML='<i class=\'bi bi-wind\'></i>'"></div>
-                <span class="skill-name">Tailwind</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="typescript.png" alt="TypeScript" onerror="this.outerHTML='<i class=\'bi bi-filetype-tsx\'></i>'"></div>
-                <span class="skill-name">TypeScript</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><i class="bi bi-bootstrap"></i></div>
-                <span class="skill-name">Bootstrap</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="flutter.png" alt="Flutter" onerror="this.outerHTML='<i class=\'bi bi-phone\'></i>'"></div>
-                <span class="skill-name">Flutter</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="dart.png" alt="Dart" onerror="this.outerHTML='<i class=\'bi bi-hexagon\'></i>'"></div>
-                <span class="skill-name">Dart</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="figma.png" alt="Figma" onerror="this.outerHTML='<i class=\'bi bi-pentagon\'></i>'"></div>
-                <span class="skill-name">Figma</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><i class="bi bi-github"></i></div>
-                <span class="skill-name">GitHub</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><i class="bi bi-cup-hot"></i></div>
-                <span class="skill-name">Java</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="python.png" alt="Python" onerror="this.outerHTML='<i class=\'bi bi-filetype-py\'></i>'"></div>
-                <span class="skill-name">Python</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="jupyternotebook.png" alt="Jupyter" onerror="this.outerHTML='<i class=\'bi bi-journal-code\'></i>'"></div>
-                <span class="skill-name">Jupyter</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="firebase.png" alt="Firebase" onerror="this.outerHTML='<i class=\'bi bi-fire\'></i>'"></div>
-                <span class="skill-name">Firebase</span>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon-wrap"><img src="scikit.png" alt="Scikit-Learn" onerror="this.outerHTML='<i class=\'bi bi-graph-up\'></i>'"></div>
-                <span class="skill-name">Scikit-Learn</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="projects">
-        <p class="section-label">Portfolio</p>
-        <h2 class="section-title">My Projects</h2>
-
-        <div class="filter-row">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="web">Web</button>
-            <button class="filter-btn" data-filter="mobile">Mobile</button>
-        </div>
-
-        <div class="projects-grid">
-
-            <div class="project-card" data-category="web">
-                <div class="project-thumb">
-                    <img src="ReuseMartWeb.jpg" alt="ReuseMart Website">
-                    <div class="project-overlay">
-                        <a href="https://github.com/KentRichardPurnomo/P3L.git" target="_blank">
-                            <i class="bi bi-github"></i> View Source
-                        </a>
-                    </div>
-                </div>
-                <div class="project-body">
-                    <p class="project-type">Web · Laravel</p>
-                    <h3 class="project-title">ReuseMart</h3>
-                    <p class="project-desc">A multi-role e-commerce and donation platform built with Laravel, enabling users to manage second-hand goods, handle transactions, schedule deliveries, manage warehouse stock, and support community donations.</p>
-                    <div class="project-tags">
-                        <span class="tag">Laravel</span>
-                        <span class="tag">PHP</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">Bootstrap</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="mobile">
-                <div class="project-thumb">
-                    <img src="ReuseMartMob.jpg" alt="ReuseMart App">
-                    <div class="project-overlay">
-                        <a href="https://github.com/Bonaventura-Abhinaya/ReuseMart-Mobile-P3L" target="_blank">
-                            <i class="bi bi-github"></i> View Source
-                        </a>
-                    </div>
-                </div>
-                <div class="project-body">
-                    <p class="project-type">Mobile · Flutter</p>
-                    <h3 class="project-title">ReuseMart App</h3>
-                    <p class="project-desc">A mobile companion app for ReuseMart built with Flutter, enabling buyers and consignors to manage second-hand goods, track transactions, receive notifications, and participate in donations from their smartphones.</p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag">Dart</span>
-                        <span class="tag">Firebase</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="web">
-                <div class="project-thumb">
-                    <img src="atmagame.png" alt="Atma Educational Game">
-                    <div class="project-overlay">
-                        <a href="https://github.com/KentRichardPurnomo/PW10_A_11668" target="_blank">
-                            <i class="bi bi-github"></i> View Source
-                        </a>
-                    </div>
-                </div>
-                <div class="project-body">
-                    <p class="project-type">Web · JavaScript</p>
-                    <h3 class="project-title">Atma Educational Game</h3>
-                    <p class="project-desc">Interactive web-based educational game designed to teach programming concepts through puzzle-solving and challenges.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Canvas API</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="web">
-                <div class="project-thumb">
-                    <img src="prediksi.png" alt="Dragon Fruit Prediction">
-                    <div class="project-overlay">
-                        <a href="https://github.com/KentRichardPurnomo/Tugas6_B_11668.git" target="_blank">
-                            <i class="bi bi-github"></i> View Source
-                        </a>
-                    </div>
-                </div>
-                <div class="project-body">
-                    <p class="project-type">Web · Machine Learning</p>
-                    <h3 class="project-title">Dragon Fruit Ripeness Prediction</h3>
-                    <p class="project-desc">Machine learning model that analyzes images of dragon fruits to predict their ripeness level using computer vision techniques.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Scikit-learn</span>
-                        <span class="tag">Jupyter</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-brand">Kent<span>.</span>dev</div>
-        <p class="footer-copy">© 2025 Kent Richard Purnomo</p>
-        <div class="footer-socials">
-            <a href="https://www.instagram.com/kentrichard_22/" class="social-pill" target="_blank"><i class="bi bi-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/kent-richard-2133892ab/" class="social-pill" target="_blank"><i class="bi bi-linkedin"></i></a>
-            <a href="https://open.spotify.com/user/w7pkp74ctfxjdj60w5m5ksqf5" class="social-pill" target="_blank"><i class="bi bi-spotify"></i></a>
-            <a href="https://www.youtube.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-youtube"></i></a>
-            <a href="https://www.tiktok.com/@lukky1804" class="social-pill" target="_blank"><i class="bi bi-tiktok"></i></a>
-        </div>
-    </footer>
-
-    <script>
-        const html = document.documentElement;
-        const themeBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const mobileTheme = document.getElementById('mobileTheme');
-        const mobileThemeIcon = document.getElementById('mobileThemeIcon');
-
-        function setTheme(dark) {
-            html.setAttribute('data-theme', dark ? 'dark' : 'light');
-            const cls = dark ? 'bi-sun' : 'bi-moon';
-            themeIcon.className = 'bi ' + cls;
-            mobileThemeIcon.className = 'bi ' + cls + ' me-2';
-            localStorage.setItem('theme', dark ? 'dark' : 'light');
-        }
-
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') setTheme(true);
-
-        themeBtn.addEventListener('click', () => {
-            setTheme(html.getAttribute('data-theme') !== 'dark');
-        });
-        mobileTheme.addEventListener('click', (e) => {
-            e.preventDefault();
-            setTheme(html.getAttribute('data-theme') !== 'dark');
-        });
-
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
-        });
-
-        mobileMenu.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                mobileMenu.classList.remove('open');
-            });
-        });
-
-        const inner = document.getElementById('carouselInner');
-        const dotsWrap = document.getElementById('carouselDots');
-        const slides = inner.querySelectorAll('.carousel-slide');
-        let current = 0;
-        let autoTimer;
-
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => goTo(i));
-            dotsWrap.appendChild(dot);
-        });
-
-        function goTo(n) {
-            current = (n + slides.length) % slides.length;
-            inner.style.transform = `translateX(-${current * 100}%)`;
-            dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
-                d.classList.toggle('active', i === current);
-            });
-        }
-
-        function startAuto() {
-            autoTimer = setInterval(() => goTo(current + 1), 4000);
-        }
-
-        function resetAuto() {
-            clearInterval(autoTimer);
-            startAuto();
-        }
-
-        document.getElementById('prevBtn').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
-        document.getElementById('nextBtn').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
-
-        startAuto();
-
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.dataset.filter;
-                document.querySelectorAll('.project-card').forEach(card => {
-                    const match = filter === 'all' || card.dataset.category === filter;
-                    card.classList.toggle('hidden', !match);
-                });
-            });
-        });
-
-        const sections = document.querySelectorAll('section[id]');
-        const subLinks = document.querySelectorAll('.sub-nav a');
-
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    subLinks.forEach(a => {
-                        a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
-                    });
+            const handleMouseMove = (e) => {
+                if (!containerRef.current) return;
+                const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+                const centerX = left + width / 2;
+                const centerY = top + height / 2;
+                const distanceX = e.clientX - centerX;
+                const distanceY = e.clientY - centerY;
+                
+                if (Math.abs(distanceX) < width / 2 + padding && Math.abs(distanceY) < height / 2 + padding) {
+                    setIsActive(true);
+                    setPosition({ x: distanceX / strength, y: distanceY / strength });
+                } else {
+                    setIsActive(false);
+                    setPosition({ x: 0, y: 0 });
                 }
-            });
-        }, { rootMargin: '-40% 0px -40% 0px' });
+            };
 
-        sections.forEach(s => obs.observe(s));
+            const handleMouseLeave = () => {
+                setIsActive(false);
+                setPosition({ x: 0, y: 0 });
+            };
+
+            return (
+                <div ref={containerRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className={className}>
+                    <div style={{
+                        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+                        transition: isActive ? "transform 0.3s ease-out" : "transform 0.6s ease-in-out",
+                        willChange: 'transform'
+                    }}>
+                        {children}
+                    </div>
+                </div>
+            );
+        };
+
+        const AnimatedText = ({ text, className }) => {
+            const elementRef = useRef(null);
+            const { scrollYProgress } = useScroll({
+                target: elementRef,
+                offset: ['start 0.8', 'end 0.2']
+            });
+
+            const words = text.split(" ");
+            
+            return (
+                <p ref={elementRef} className={className}>
+                    {words.map((word, i) => (
+                        <span key={i} className="relative inline-block mr-1 lg:mr-2">
+                            {word.split("").map((char, j) => {
+                                const start = (i * word.length + j) / (text.length * 1.5);
+                                const end = start + 0.1;
+                                const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1]);
+                                return (
+                                    <span key={j} className="relative inline-block">
+                                        <span className="invisible">{char}</span>
+                                        <motion.span className="absolute left-0 top-0" style={{ opacity }}>{char}</motion.span>
+                                    </span>
+                                );
+                            })}
+                        </span>
+                    ))}
+                </p>
+            );
+        };
+        const HeroSection = () => {
+            return (
+                <section className="h-screen flex flex-col justify-between overflow-x-clip relative max-w-[1440px] mx-auto px-6 md:px-10 pt-6 md:pt-8 pb-7 sm:pb-8 md:pb-10">
+                    
+                    {/* 1. Navbar */}
+                    <FadeIn delay={0} y={-20} className="w-full relative z-40">
+                        <nav className="flex justify-between items-center text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg">
+                            <div className="font-black text-xl md:text-2xl tracking-tighter">KENT<span className="text-[#B600A8]">.</span>DEV</div>
+                            <div className="flex gap-4 md:gap-8 lg:text-[1.2rem]">
+                                {["About", "Skills", "Projects"].map((item) => (
+                                    <a key={item} href={`#${item.toLowerCase()}`} className="hover:opacity-70 transition-opacity duration-200">{item}</a>
+                                ))}
+                            </div>
+                        </nav>
+                    </FadeIn>
+
+                    <div className="absolute top-[25%] sm:top-[22%] md:top-[18%] left-0 w-full pointer-events-none z-10 flex justify-center">
+                        <FadeIn delay={0.15} y={40} className="w-full text-center">
+                            <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap text-[15vw] sm:text-[16vw]">
+                                Hi, i'm kent
+                            </h1>
+                        </FadeIn>
+                    </div>
+
+                    <FadeIn delay={0.6} y={30} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[220px] sm:w-[320px] md:w-[420px]">
+                        <Magnet padding={100} strength={4}>
+                            <div className="w-full aspect-square rounded-full overflow-hidden border-[8px] border-[#0C0C0C] shadow-[0_0_40px_rgba(182,0,168,0.25)] bg-[#0C0C0C]">
+                                <img src="kenticon.jpg" alt="Kent Richard" className="w-full h-full object-cover" 
+                                     onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+                                <div style={{display:'none'}} className="w-full h-full bg-[#111] flex items-center justify-center text-6xl font-black text-[#555]">KR</div>
+                            </div>
+                        </Magnet>
+                    </FadeIn>
+
+
+                    <div className="relative z-30 flex justify-between items-end pointer-events-none">
+                        <FadeIn delay={0.35} y={20} className="pointer-events-auto">
+                            <div className="flex flex-col gap-4">
+                                <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-[clamp(0.75rem,1.4vw,1.5rem)] max-w-[180px] sm:max-w-[240px] md:max-w-[300px]">
+                                    Full-stack developer, Mobile, & UI/UX Designer.
+                                </p>
+                                <div className="flex gap-3 text-xl">
+                                    <a href="https://github.com/KentRichardPurnomo" target="_blank" className="hover:text-[#B600A8] transition-colors"><i className="bi bi-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/kent-richard-2133892ab/" target="_blank" className="hover:text-[#B600A8] transition-colors"><i className="bi bi-linkedin"></i></a>
+                                    <a href="https://www.instagram.com/kentrichard_22/" target="_blank" className="hover:text-[#B600A8] transition-colors"><i className="bi bi-instagram"></i></a>
+                                </div>
+                            </div>
+                        </FadeIn>
+                        
+                        <FadeIn delay={0.5} y={20} className="pointer-events-auto">
+                            <ContactButton text="View Projects" href="#projects" />
+                        </FadeIn>
+                    </div>
+                    
+                </section>
+            );
+        };
+
+        const AchievementsSection = () => {
+            const sliderRef = useRef(null);
+            const [isDown, setIsDown] = useState(false);
+            const [startX, setStartX] = useState(0);
+            const [scrollLeft, setScrollLeft] = useState(0);
+
+            const handleMouseDown = (e) => {
+                setIsDown(true);
+                setStartX(e.pageX - sliderRef.current.offsetLeft);
+                setScrollLeft(sliderRef.current.scrollLeft);
+            };
+            const handleMouseLeave = () => setIsDown(false);
+            const handleMouseUp = () => setIsDown(false);
+            const handleMouseMove = (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - sliderRef.current.offsetLeft;
+                const walk = (x - startX) * 2; 
+                sliderRef.current.scrollLeft = scrollLeft - walk;
+            };
+
+            const certs = [
+                "sertif0.jpg", "sertif6.png", "sertif2.png", 
+                "sertif3.png", "sertif4.png", "sertif5.png", "sertif1.png"
+            ];
+
+            return (
+                <section className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-20 overflow-hidden">  
+                    <div 
+                        ref={sliderRef}
+                        onMouseDown={handleMouseDown}
+                        onMouseLeave={handleMouseLeave}
+                        onMouseUp={handleMouseUp}
+                        onMouseMove={handleMouseMove}
+                        className={`flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar px-6 md:px-10 pb-8 select-none ${isDown ? 'cursor-grabbing' : 'cursor-grab'}`}
+                        style={{ scrollBehavior: isDown ? 'auto' : 'smooth' }}
+                    >
+                        {certs.map((img, i) => (
+                            <div key={i} className="w-[280px] sm:w-[340px] md:w-[400px] aspect-[4/3] rounded-[24px] bg-[#f5f5f5] shrink-0 border-2 border-[#222] flex items-center justify-center overflow-hidden relative group">
+                                <div className="absolute inset-0 bg-gradient-to-tr from-[#B600A8]/30 to-transparent z-10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                                <img src={img} alt={`Achievement ${i}`} className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105 pointer-events-none" 
+                                     onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+                                <div style={{display:'none'}} className="w-full h-full flex flex-col items-center justify-center text-[#aaa] bg-[#111] pointer-events-none">
+                                    <i className="bi bi-patch-check text-5xl mb-2"></i>
+                                    <span className="text-sm font-medium tracking-widest uppercase">Certificate {i}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            );
+        };
+
+        const AboutSection = () => {
+            return (
+                <section id="about" className="min-h-screen relative flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 overflow-hidden max-w-[1440px] mx-auto">
+                    
+                    {/* Gambar Dekoratif 3D */}
+                    <FadeIn delay={0.1} x={-80} y={0} duration={0.9} className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] w-[100px] sm:w-[140px] md:w-[180px] pointer-events-none opacity-50 sm:opacity-100">
+                        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="Moon" />
+                    </FadeIn>
+                    <FadeIn delay={0.25} x={-80} y={0} duration={0.9} className="absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] w-[80px] sm:w-[120px] md:w-[150px] pointer-events-none opacity-50 sm:opacity-100">
+                        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png" alt="3D Object" />
+                    </FadeIn>
+                    <FadeIn delay={0.15} x={80} y={0} duration={0.9} className="absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] w-[100px] sm:w-[140px] md:w-[180px] pointer-events-none opacity-50 sm:opacity-100">
+                        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png" alt="Lego" />
+                    </FadeIn>
+                    <FadeIn delay={0.3} x={80} y={0} duration={0.9} className="absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] w-[110px] sm:w-[150px] md:w-[200px] pointer-events-none opacity-50 sm:opacity-100">
+                        <img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png" alt="3D Group" />
+                    </FadeIn>
+
+                    <div className="z-10 flex flex-col items-center">
+                        <FadeIn delay={0} y={40} className="mb-10 sm:mb-14 md:mb-16">
+                            <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center text-[clamp(3rem,12vw,160px)]">
+                                About me
+                            </h2>
+                        </FadeIn>
+                        
+                        <div className="mb-16 sm:mb-20 md:mb-24 px-4">
+                            <AnimatedText 
+                                text="Hello! I am a full-stack developer, mobile, UI/UX designer, and a student at Universitas Atma Jaya Yogyakarta (UAJY)."
+                                className="text-[#D7E2EA] font-medium text-center leading-relaxed max-w-[750px] text-[clamp(1rem,2vw,1.35rem)]"
+                            />
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const SkillsSection = () => {
+            const skills = [
+                { num: "01", title: "Frontend Web", desc: "HTML, CSS, JavaScript, TypeScript, React, Tailwind CSS, Bootstrap" },
+                { num: "02", title: "Backend Web", desc: "PHP, Laravel, C, Java, MySQL, Firebase" },
+                { num: "03", title: "Mobile App", desc: "Flutter, Dart - Building cross-platform mobile experiences" },
+                { num: "04", title: "Data & ML", desc: "Python, Jupyter Notebook, Scikit-Learn - Dragon Fruit Ripeness Prediction" },
+                { num: "05", title: "Design & Tools", desc: "Figma (UI/UX), Canva, Git, GitHub, Automation (n8n)" }
+            ];
+
+            return (
+                <section id="skills" className="bg-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 relative z-20">
+                    <h2 className="text-[#0C0C0C] font-black uppercase text-center mb-16 sm:mb-20 md:mb-28 text-[clamp(3rem,12vw,160px)] leading-none">
+                        Skills
+                    </h2>
+
+                    <div className="max-w-5xl mx-auto flex flex-col">
+                        {skills.map((svc, i) => (
+                            <FadeIn key={svc.num} delay={i * 0.1} y={30} className="border-b border-[rgba(12,12,12,0.15)] last:border-0 py-8 sm:py-10 md:py-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-12 group cursor-default">
+                                <span className="text-[#0C0C0C] font-black text-[clamp(3rem,10vw,140px)] leading-none md:w-1/3 transition-colors group-hover:text-[#B600A8]">
+                                    {svc.num}
+                                </span>
+                                <div className="md:w-2/3 flex flex-col gap-2">
+                                    <h3 className="text-[#0C0C0C] font-medium uppercase text-[clamp(1rem,2.2vw,2.1rem)]">
+                                        {svc.title}
+                                    </h3>
+                                    <p className="text-[#0C0C0C] font-light leading-relaxed max-w-2xl text-[clamp(0.85rem,1.6vw,1.25rem)] opacity-60">
+                                        {svc.desc}
+                                    </p>
+                                </div>
+                            </FadeIn>
+                        ))}
+                    </div>
+                </section>
+            );
+        };
+
+        const ProjectCard = ({ project, index, totalCards }) => {
+            const targetScale = 1 - (totalCards - 1 - index) * 0.03;
+            
+            return (
+                <div className="sticky top-24 md:top-32 h-[85vh] flex items-center justify-center w-full" style={{ marginTop: `${index * 28}px` }}>
+                    <motion.div 
+                        initial={{ scale: 1 }}
+                        whileInView={{ scale: targetScale }}
+                        viewport={{ margin: "-200px" }}
+                        transition={{ duration: 0.5 }}
+                        className="w-full h-full max-w-6xl mx-auto rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-6 sm:p-8 md:p-10 flex flex-col"
+                    >
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                            <div className="flex items-center gap-4 sm:gap-6">
+                                <span className="font-black text-[clamp(2.5rem,6vw,80px)] text-[#D7E2EA] leading-none">{project.num}</span>
+                                <div className="flex flex-col">
+                                    <span className="text-[#B600A8] uppercase tracking-widest text-xs font-bold">{project.category}</span>
+                                    <h3 className="text-[#D7E2EA] font-medium text-xl sm:text-3xl">{project.title}</h3>
+                                </div>
+                            </div>
+                            <a href={project.link} target="_blank" className="rounded-full border border-[#D7E2EA] text-[#D7E2EA] font-medium uppercase tracking-widest px-6 py-3 text-xs sm:text-sm hover:bg-[#D7E2EA] hover:text-[#0C0C0C] transition-colors whitespace-nowrap">
+                                <i className="bi bi-github mr-2"></i>Live Code
+                            </a>
+                        </div>
+                        
+                        <div className="mb-6">
+                            <p className="text-[#D7E2EA]/70 text-sm sm:text-base max-w-3xl line-clamp-2 sm:line-clamp-none">{project.desc}</p>
+                        </div>
+
+                        <div className="flex-1 w-full bg-[#111] rounded-[30px] sm:rounded-[40px] overflow-hidden relative group">
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-500 z-10"></div>
+                            <img src={project.img} alt={project.title} className="w-full h-full object-cover transition duration-700 group-hover:scale-105" 
+                                 onError={(e) => { e.target.src='https://via.placeholder.com/1280x720/111111/444444?text=Project+Preview'; }} />
+                        </div>
+                    </motion.div>
+                </div>
+            );
+        };
+
+        const ProjectsSection = () => {
+            const [filter, setFilter] = useState('All');
+            const categories = ['All', 'Web', 'Mobile'];
+
+            const projects = [
+                {
+                    num: "01", category: "Web & Mobile · Laravel & Flutter", title: "ReuseMart",
+                    desc: "A multi-role e-commerce and donation platform enabling users to manage second-hand goods, handle transactions, schedule deliveries, and support community donations.",
+                    img: "ReuseMartWeb.jpg",
+                    link: "https://github.com/KentRichardPurnomo/P3L.git",
+                    types: ['Web', 'Mobile']
+                },
+                {
+                    num: "02", category: "Web · JavaScript & Canvas API", title: "Atma Educational Game",
+                    desc: "Interactive web-based educational game designed to teach programming concepts through puzzle-solving and challenges.",
+                    img: "atmagame.png",
+                    link: "https://github.com/KentRichardPurnomo/PW10_A_11668",
+                    types: ['Web']
+                },
+                {
+                    num: "03", category: "Machine Learning · Python", title: "Dragon Fruit Ripeness",
+                    desc: "Machine learning model that analyzes images of dragon fruits to predict their ripeness level using computer vision techniques and Scikit-learn.",
+                    img: "prediksi.png",
+                    link: "https://github.com/KentRichardPurnomo/Tugas6_B_11668.git",
+                    types: ['Web']
+                }
+            ];
+
+            const filteredProjects = projects.filter(p => filter === 'All' || p.types.includes(filter));
+
+            return (
+                <section id="projects" className="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative pt-20 pb-40 px-5 sm:px-8 md:px-10">
+                    <h2 className="hero-heading font-black uppercase text-center mb-8 text-[clamp(3rem,12vw,160px)] leading-none">
+                        Project
+                    </h2>
+                    
+                    {/* Filter Navigation */}
+                    <div className="flex justify-center gap-3 sm:gap-4 mb-16 flex-wrap">
+                        {categories.map(cat => (
+                            <button 
+                                key={cat}
+                                onClick={() => setFilter(cat)}
+                                className={`px-6 sm:px-8 py-2.5 rounded-full font-medium uppercase tracking-widest text-xs sm:text-sm transition-all duration-300 border-2 ${
+                                    filter === cat 
+                                    ? 'bg-transparent border-[#D7E2EA] text-[#D7E2EA]' 
+                                    : 'border-transparent text-[#D7E2EA]/50 hover:text-[#D7E2EA]'
+                                }`}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="relative w-full pb-32">
+                        {filteredProjects.map((proj, i) => (
+                            <ProjectCard key={proj.num} project={proj} index={i} totalCards={filteredProjects.length} />
+                        ))}
+                        
+                        {filteredProjects.length === 0 && (
+                            <div className="text-center text-[#D7E2EA]/50 py-20 uppercase tracking-widest">
+                                No projects found in this category.
+                            </div>
+                        )}
+                    </div>
+                </section>
+            );
+        };
+
+        const Footer = () => (
+            <footer className="bg-[#0C0C0C] border-t border-[#222] py-10 px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="font-black text-xl tracking-tighter text-[#D7E2EA]">KENT<span className="text-[#B600A8]">.</span>DEV</div>
+                <div className="text-[#D7E2EA]/50 text-sm">© 2026 Kent Richard Purnomo</div>
+                <div className="flex gap-4 text-xl text-[#D7E2EA]">
+                    <a href="https://www.instagram.com/kentrichard_22/" target="_blank" className="hover:text-[#B600A8] transition-colors"><i className="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/kent-richard-2133892ab/" target="_blank" className="hover:text-[#B600A8] transition-colors"><i className="bi bi-linkedin"></i></a>
+                    <a href="https://www.youtube.com/@lukky1804" target="_blank" className="hover:text-[#B600A8] transition-colors"><i className="bi bi-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@lukky1804" target="_blank" className="hover:text-[#B600A8] transition-colors"><i className="bi bi-tiktok"></i></a>
+                </div>
+            </footer>
+        )
+        const App = () => {
+            return (
+                <main className="w-full selection:bg-[#B600A8] selection:text-white relative">
+                    <HeroSection />
+                    <AchievementsSection />
+                    <AboutSection />
+                    <SkillsSection />
+                    <ProjectsSection />
+                    <Footer />
+                </main>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
     </script>
 </body>
 </html>
